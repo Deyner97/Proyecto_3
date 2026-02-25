@@ -1,8 +1,10 @@
 const express = require('express');
+const cors = require('cors'); // <--- 1. Importa CORS
 const app = express();
-const PORT = 3001; // Usamos el 3001 porque React ya usa el 5173
+const PORT = 3001;
 
-// Esta es una "ruta" (endpoint). Cuando alguien entre aquí, el servidor responde.
+app.use(cors()); // <--- 2. Dale permiso a React para entrar
+
 app.get('/api/saludo', (req, res) => {
   res.json({ mensaje: "¡Hola desde el servidor Node.js! 🧠" });
 });
