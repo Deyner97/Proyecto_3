@@ -11,7 +11,7 @@ export default function App() {
   };
 
   return (
-    <div className="bg-gray-900 min-h-screen text-white">
+    <div className="bg-gray-900 min-h-screen text-white font-sans">
       {/* Header */}
       <header className="p-10 text-center border-b border-gray-800">
         <h1 className="text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
@@ -20,7 +20,7 @@ export default function App() {
         <p className="mt-4 text-gray-400 text-lg">Webs de alto rendimiento con Node.js y Python</p>
       </header>
 
-      {/* Botón de Python - El Gancho Tecnológico */}
+      {/* Botón de Python */}
       <div className="py-10 text-center">
         <button 
           onClick={consultarIA}
@@ -42,7 +42,7 @@ export default function App() {
         <Card title="Plan Enterprise" price="Custom" feat="Sistemas con Inteligencia Artificial" />
       </main>
     </div>
-  )
+  );
 }
 
 function Card({ title, price, feat }) {
@@ -53,5 +53,5 @@ function Card({ title, price, feat }) {
       <p className="text-gray-400 mb-6">{feat}</p>
       <button className="w-full py-2 rounded-lg bg-white text-black font-bold">Seleccionar</button>
     </div>
-  )
+  );
 }
