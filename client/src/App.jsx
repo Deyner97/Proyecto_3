@@ -1,26 +1,29 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 function App() {
-  const [datos, setDatos] = useState("Cargando saludo...");
+  const [datosPython, setDatosPython] = useState(null);
 
-  useEffect(() => {
-    // Aquí es donde React le toca la puerta a Node
-    fetch('http://localhost:3001/api/saludo')
-      .then(respuesta => respuesta.json())
-      .then(data => {
-        setDatos(data.mensaje); // Guardamos lo que nos dijo el servidor
-      })
-      .catch(error => console.log("Error conectando:", error));
-  }, []);
+  const ejecutarPython = () => {
+    fetch('http://localhost:3001/api/python')
+      .then(res => res.json())
+      .then(data => setDatosPython(data))
+      .catch(err => console.log(err));
+  };
 
   return (
     <div style={{ padding: '20px', textAlign: 'center' }}>
-      <h1>Proyecto 3: Conexión Exitosa 🚀</h1>
-      
-      <div style={{ border: '2px solid green', padding: '20px', borderRadius: '10px' }}>
-        <h3>Respuesta del Servidor:</h3>
-        <p style={{ fontSize: '20px', color: 'blue' }}>{datos}</p>
-      </div>
+      <h1>Proyecto 3: Integración Full Stack</h1>
+      <button onClick={ejecutarPython} style={{ padding: '10px 20px', cursor: 'pointer' }}>
+        Ejecutar Script de Python
+      </button>
+
+      {datosPython && (
+        <div style={{ marginTop: '20px', background: '#f0f0f0', padding: '15px' }}>
+          <h3>Resultado de Python:</h3>
+          <p><strong>Mensaje:</strong> {datosPython.mensaje_python}</p>
+          <p><strong>Valor calculado:</strong> {datosPython.valor}%</p>
+        </div>
+      )}
     </div>
   )
 }

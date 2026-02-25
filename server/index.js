@@ -1,12 +1,25 @@
 const express = require('express');
-const cors = require('cors'); // <--- 1. Importa CORS
+const cors = require('cors');
+const { spawn } = require('child_process'); // <--- Importamos esta herramienta
 const app = express();
 const PORT = 3001;
 
-app.use(cors()); // <--- 2. Dale permiso a React para entrar
+app.use(cors());
 
-app.get('/api/saludo', (req, res) => {
-  res.json({ mensaje: "¡Hola desde el servidor Node.js! 🧠" });
+// NUEVA RUTA: Aquí es donde Node llama a Python
+app.get('/api/python', (req, res) => {
+  // Ejecutamos el comando 'python' apuntando a nuestro archivo
+  const pythonProcess = spawn('python', ['./python_logic/mipagina.py']);
+
+  pythonProcess.stdout.on('data', (data) => {
+    // Cuando Python termina y nos manda la info
+    const resultadoPython = JSON.parse(data.toString());
+    res.json(resultadoPython);
+  });
+
+  pythonProcess.stderr.on('data', (data) => {
+    console.error(`Error en Python: ${data}`);
+  });
 });
 
 app.listen(PORT, () => {
