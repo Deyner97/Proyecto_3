@@ -11,35 +11,32 @@ export default function App() {
   };
 
   return (
-    <div className="bg-gray-900 min-h-screen text-white font-sans">
+    <div className="bg-dark min-vh-100 text-white">
       {/* Header */}
-      <header className="p-10 text-center border-b border-gray-800">
-        <h1 className="text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
-          DEYNER DEV STUDIO
-        </h1>
-        <p className="mt-4 text-gray-400 text-lg">Webs de alto rendimiento con Node.js y Python</p>
+      <header className="py-5 text-center border-bottom border-secondary">
+        <h1 className="display-3 fw-bold text-info">DEYNER DEV STUDIO</h1>
+        <p className="lead text-secondary">Webs de alto rendimiento con Node.js y Python</p>
       </header>
 
       {/* Botón de Python */}
-      <div className="py-10 text-center">
-        <button 
-          onClick={consultarIA}
-          className="bg-cyan-500 hover:bg-cyan-600 text-black font-bold py-3 px-8 rounded-full transition-all"
-        >
+      <div className="container py-5 text-center">
+        <button onClick={consultarIA} className="btn btn-outline-info btn-lg rounded-pill px-5">
           Calcular Presupuesto con IA
         </button>
         {analisis && (
-          <div className="mt-6 p-4 bg-gray-800 rounded-lg max-w-md mx-auto border border-cyan-500">
-            <p className="text-cyan-400 font-mono">{analisis.mensaje_python}</p>
+          <div className="mt-4 p-3 bg-secondary bg-opacity-25 border border-info rounded mx-auto" style={{maxWidth: '500px'}}>
+            <code className="text-info">{analisis.mensaje_python}</code>
           </div>
         )}
       </div>
 
-      {/* Grilla de Servicios */}
-      <main className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 p-10">
-        <Card title="Plan Básico" price="$199" feat="Landing Page + SEO" />
-        <Card title="Plan Business" price="$499" feat="E-commerce + Base de Datos" />
-        <Card title="Plan Enterprise" price="Custom" feat="Sistemas con Inteligencia Artificial" />
+      {/* Servicios */}
+      <main className="container pb-5">
+        <div className="row g-4">
+          <Card title="Plan Básico" price="$199" feat="Landing Page + SEO" />
+          <Card title="Plan Business" price="$499" feat="E-commerce + DB" />
+          <Card title="Plan Enterprise" price="Custom" feat="Sistemas con IA" />
+        </div>
       </main>
     </div>
   );
@@ -47,11 +44,13 @@ export default function App() {
 
 function Card({ title, price, feat }) {
   return (
-    <div className="bg-gray-800 p-8 rounded-2xl hover:scale-105 transition-transform border border-gray-700">
-      <h3 className="text-xl font-bold text-cyan-400">{title}</h3>
-      <div className="text-4xl font-black my-4">{price}</div>
-      <p className="text-gray-400 mb-6">{feat}</p>
-      <button className="w-full py-2 rounded-lg bg-white text-black font-bold">Seleccionar</button>
+    <div className="col-md-4">
+      <div className="card h-100 bg-secondary bg-opacity-10 border-secondary text-white p-4">
+        <h3 className="card-title text-info">{title}</h3>
+        <div className="display-5 my-3 fw-bold">{price}</div>
+        <p className="card-text text-secondary mb-4">{feat}</p>
+        <button className="btn btn-light fw-bold mt-auto">Seleccionar</button>
+      </div>
     </div>
   );
 }
